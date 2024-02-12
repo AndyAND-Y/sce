@@ -7,7 +7,7 @@ This repository is our collaborative space for building an exciting trading plat
 ### Tech Stack:
 - **Next.js**: Powerful React framework for building modern web applications.
 - **Prisma**: Database toolkit for TypeScript and Node.js that simplifies database access.
-- **Pusher.js**: Real-time communication library to keep our platform dynamic and responsive.
+- **Websockets**: Real-time communication library to keep our platform dynamic and responsive.
 - **Typescript**: Strongly typed superset of JavaScript for enhanced developer experience.
 - **Tailwind CSS**: Utility-first CSS framework for rapid UI development and easy customization.
 - **PlanetScale**: Scalable and distributed database for ensuring robust data management.
