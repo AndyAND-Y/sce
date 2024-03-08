@@ -1,33 +1,33 @@
 # Trading Platform GitHub Repository
 
-👋 Welcome, Team!
+## Tech Stack:
+- Next.js: Powerful React framework for building modern web applications.
+- Prisma: Database toolkit for TypeScript and Node.js that simplifies database access.
+- MongoDB: Scalable NoSQL database for robust data management.
+- Typescript: Strongly typed superset of JavaScript for enhanced developer experience.
+- Tailwind CSS: Utility-first CSS framework for rapid UI development and easy customization.
+- NextAuth: Authentication library for Next.js applications, ensuring secure user authentication.
+- Vercel: Hosting platform for deploying Next.js applications with ease.
 
-This repository is our collaborative space for building an exciting trading platform. Here's a brief overview of the enhanced tech stack and collaboration process:
+## To-Do List for Trading Platform Coding Project:
+1. User Management:
+   - Set up user login and storage using NextAuth and MongoDB.
+   - Protect passwords with hashing.
+   - Track failed logins and freeze accounts.
+   - Add extra security with 2FA.
+   
+2. Transaction Management:
+   - Save transaction records in MongoDB.
+   - Notify users of transactions.
+   
+3. Support Ticket System:
+   - Make a system for users and agents to create and manage support tickets.
+   
+4. Market Data and Trading:
+   - Show market data and allow trading using Next.js.
+   - Integrate market data with MongoDB.
+   
+5. Portfolio Management:
+   - Make a system to manage money and crypto using Prisma and MongoDB.
 
-### Tech Stack:
-- **Next.js**: Powerful React framework for building modern web applications.
-- **Prisma**: Database toolkit for TypeScript and Node.js that simplifies database access.
-- **Pusher.js**: Real-time communication library to keep our platform dynamic and responsive.
-- **Typescript**: Strongly typed superset of JavaScript for enhanced developer experience.
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development and easy customization.
-- **PlanetScale**: Scalable and distributed database for ensuring robust data management.
-- **NextAuth**: Authentication library for Next.js applications, ensuring secure user authentication.
-
-### Development Workflow:
-1. **Clone the Repository**: `git clone [repository-url]`
-2. **Install Dependencies**: `npm install`
-3. **Start Development Server**: `npm run dev`
-4. **Create Feature Branches**: `git switch -c feature/[your-feature-name]`
-5. **Happy Coding!** 🚀
-
-### Branching Strategy:
-- **Main Branch**: Reserved for production-ready code.
-- **Feature Branches**: Branches for ongoing development and testing of new features.
-
-### Guidelines:
-- Pull from main frequently.  
-- Ensure comprehensive testing before creating a pull request.
-- Create a new branch for each feature to keep the codebase clean and organized.
-- Follow a consistent coding style (check `.prettierrc` and `.eslintrc`).
-
-Let's create something amazing together! 🌟 If you have questions or need assistance, feel free to reach out to your team members. Happy coding!
+Let's create something amazing together! If you have questions or need assistance, feel free to reach out to your team members. Happy coding!
