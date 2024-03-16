@@ -30,7 +30,7 @@ export default async function TradingPage({ params }: { params: { symbol: string
                     fallback={<div>Loading...</div>}
                 >
 
-                    <ChartLayout symbol={"btc"} timeframe="1d" />
+                    <ChartLayout symbol={symbol} timeframe="1d" />
                 </Suspense>
             </div>
         </div>
