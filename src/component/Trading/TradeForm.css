@@ -92,22 +92,19 @@ input {
     display: block;
 }
 
-#radix-\:Ruukq\:-content-tab1 > fieldset:nth-child(2) > button,
-#radix-\:Ruukq\:-content-tab1 > fieldset:nth-child(3) > button,
-#radix-\:Ruukq\:-content-tab2 > fieldset:nth-child(2) > button,
-#radix-\:Ruukq\:-content-tab2 > fieldset:nth-child(3) > button,
-#radix-\:Ruukq\:-content-tab3 > fieldset:nth-child(2) > button,
-#radix-\:Ruukq\:-content-tab3 > fieldset:nth-child(3) > button {
-    all: unset;
-}
+/*#radix-\:Ruukq\:-content-tab1 > fieldset:nth-child(2) > button,*/
+/*#radix-\:Ruukq\:-content-tab1 > fieldset:nth-child(3) > button,*/
+/*#radix-\:Ruukq\:-content-tab2 > fieldset:nth-child(2) > button,*/
+/*#radix-\:Ruukq\:-content-tab2 > fieldset:nth-child(3) > button,*/
+/*#radix-\:Ruukq\:-content-tab3 > fieldset:nth-child(2) > button,*/
+/*#radix-\:Ruukq\:-content-tab3 > fieldset:nth-child(3) > button {*/
+/*    all: unset;*/
+/*}*/
 
 .Input,
-#radix-\:Reukq\:-content-tab1 > fieldset:nth-child(2) > button,
-#radix-\:Reukq\:-content-tab1 > fieldset:nth-child(3) > button,
-#radix-\:Reukq\:-content-tab2 > fieldset:nth-child(2) > button,
-#radix-\:Reukq\:-content-tab2 > fieldset:nth-child(3) > button,
-#radix-\:Reukq\:-content-tab3 > fieldset:nth-child(2) > button,
-#radix-\:Reukq\:-content-tab3 > fieldset:nth-child(3) > button
+#radix-\:Reukq\:-content-tab1 > form > fieldset:nth-child(2) > button,
+#radix-\:Reukq\:-content-tab1 > form > fieldset:nth-child(3) > button,
+#radix-\:Reukq\:-content-tab1 > form > fieldset:nth-child(4) > button
 {
     flex: 1 0 auto;
     border-radius: 4px;
