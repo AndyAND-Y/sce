@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Account {
-    id                String  @id @default(cuid()) @map("_id") @db.ObjectId
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
     userId            String  @db.ObjectId
     type              String
     provider          String
@@ -33,7 +33,7 @@ model Account {
 }
 
 model User {
-    id             String    @id @default(cuid()) @map("_id") @db.ObjectId
+    id             String    @id @default(auto()) @map("_id") @db.ObjectId
     name           String?
     email          String?   @unique
     hashedPassword String?
