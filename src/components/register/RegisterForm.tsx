@@ -7,11 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Container from "../Container";
 import register from "@/actions/register";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
 
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
+
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
@@ -29,7 +32,9 @@ export default function RegisterForm() {
             .then((data) => {
                 setError(data.error)
                 setSuccess(data.success)
-
+            })
+            .then(() => {
+                router.push("/");
             })
     }
 

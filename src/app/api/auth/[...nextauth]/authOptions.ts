@@ -1,7 +1,8 @@
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { getTwoFactorConfirmationByUserId } from "@/data/getTwoFactorConfirmation";
 
 
 const authOptions: AuthOptions = {
@@ -10,7 +11,8 @@ const authOptions: AuthOptions = {
             name: "Credentials",
             credentials: {
                 email: { label: "Email", type: "email" },
-                password: { label: "Password", type: "password" }
+                password: { label: "Password", type: "password" },
+                code: { label: "Code", type: "text" }
             },
             async authorize(credentials) {
 
@@ -41,9 +43,19 @@ const authOptions: AuthOptions = {
                     return user;
                 }
 
-                ///TO DO add 2fa
+                const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(user.id);
 
-                return null
+                if (!twoFactorConfirmation) {
+                    throw new Error("No confirmation!");
+                }
+
+                await db.twoFactorConfirmation.delete({
+                    where: {
+                        id: twoFactorConfirmation.id
+                    }
+                })
+
+                return user;
 
             }
         })
