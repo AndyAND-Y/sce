@@ -22,8 +22,8 @@ const ThemeButton: React.FC = () => {
 
 
     return (
-        <div className="p-2 flex justify-center items-center">
-            <button
+        <div className="p-1 flex justify-center items-center">
+            <div
                 className="size-8 text-black dark:text-white transition-all"
                 onClick={handleThemeChange}
             >
@@ -32,7 +32,7 @@ const ThemeButton: React.FC = () => {
                         <FaMoon className="h-full w-full before:scale-0 scale-100 duration-200" /> :
                         <FaSun className="h-full w-full before:scale-0 scale-100 duration-200" />
                 }
-            </button>
+            </div>
         </div>
     )
 

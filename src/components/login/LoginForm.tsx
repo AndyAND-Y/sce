@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LoginSchema from "@/schemas/loginSchema";
 import { signIn } from "next-auth/react";
+import Button from "../Button";
 
 export default function RegisterForm() {
 
@@ -42,12 +43,18 @@ export default function RegisterForm() {
                 if (data?.success) {
                     form.reset()
                     setSuccess(data.success);
+                    signIn("credentials", {
+                        ...values,
+                        redirect: false
+                    }).then(() => {
+                        router.push('/')
+                        router.refresh();
+                    })
                 }
 
                 if (data?.twoFactor) {
                     setShowTwoFactor(true);
                 }
-                return data
             })
             .catch(() => setError("Something went wrong!"))
             .then(() => {
@@ -101,12 +108,11 @@ export default function RegisterForm() {
                                 </>
                             )
                         }
-                        <button
-                            className="p-1 text-lg bg-slate-400 dark:bg-slate-800 rounded-lg border dark:border-white border-black hover:shadow-inner hover:dark:bg-slate-900 hover:bg-slate-500 transition-all duration-200"
+                        <Button
                             type="submit"
                         >
                             {showTwoFactor ? "Confirm" : "Login"}
-                        </button>
+                        </Button>
                         {error && <p className="text-red-500">{error}</p>}
                         {success && <p className="text-green-500">{success}</p>}
                     </form>

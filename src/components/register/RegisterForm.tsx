@@ -8,6 +8,7 @@ import Container from "../Container";
 import register from "@/actions/register";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Button from "../Button";
 
 export default function RegisterForm() {
 
@@ -67,12 +68,11 @@ export default function RegisterForm() {
                             <p className=""> {form.formState.errors.password?.message} </p>
                         </div>
 
-                        <button
-                            className="p-1 text-lg bg-slate-400 dark:bg-slate-800 rounded-lg border dark:border-white border-black hover:shadow-inner hover:dark:bg-slate-900 hover:bg-slate-500 transition-all duration-200"
+                        <Button
                             type="submit"
                         >
                             Register
-                        </button>
+                        </Button>
                         {error && <p className="text-red-500">{error}</p>}
                         {success && <p className="text-green-500">{success}</p>}
                     </form>

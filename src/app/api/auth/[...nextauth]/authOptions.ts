@@ -67,7 +67,6 @@ const authOptions: AuthOptions = {
     session: {
         strategy: "jwt",
     },
-    secret: "SECRET"
 }
 
 export default authOptions;

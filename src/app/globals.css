@@ -6,3 +6,12 @@ html,
 body {
     @apply text-black dark:text-white bg-slate-100 dark:bg-slate-800
 }
+
+
+.tooltip {
+    @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+    @apply visible z-50;
+}
