@@ -1,6 +1,5 @@
 "use client";
 import formatNumber from "@/utils/formatNumber";
-import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react"
 
 interface CoinPriceProps {
