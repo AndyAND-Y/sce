@@ -7,6 +7,7 @@ import { generateTwoFactorToken } from "@/lib/token";
 import { sendTwoFactorTokenEmail } from "@/lib/mail";
 import { getTwoFactorTokenByEmail } from "@/data/getTwoFactorToken";
 import { getTwoFactorConfirmationByUserId } from "@/data/getTwoFactorConfirmation";
+import bcrypt from "bcrypt";
 
 const login = async (values: z.infer<typeof LoginSchema>) => {
     const validatedFields = LoginSchema.safeParse(values);
@@ -25,6 +26,15 @@ const login = async (values: z.infer<typeof LoginSchema>) => {
 
     if (!existingUser || !existingUser.email || !existingUser.hashedPassword) {
         return { error: "Email does not exist!" }
+    }
+
+    const isCorrectPassword = await bcrypt.compare(
+        password,
+        existingUser.hashedPassword
+    )
+
+    if (!isCorrectPassword) {
+        return { error: "Password is not correct!" }
     }
 
     if (existingUser.has2FA) {
