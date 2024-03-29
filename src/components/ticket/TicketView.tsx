@@ -42,7 +42,7 @@ export default function TicketView({ supportView, ticket }: TicketViewProps) {
 
     return (
         <div>
-            <div className="flex flex-col p-4 rounded-lg shadow-sm hover:shadow bg-slate-200 dark:bg-slate-900 hover:bg-slate-300 hover:dark:bg-slate-700 transition-all duration-200">
+            <div className="flex flex-col p-4 rounded-lg shadow-sm bg-slate-200 dark:bg-slate-900 transition-all duration-200">
 
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col">

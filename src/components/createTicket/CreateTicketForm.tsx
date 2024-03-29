@@ -37,7 +37,7 @@ export default function CreateTicketForm() {
                 }
                 if (data.success) {
                     setSuccess("");
-                    router.push("/view-tickets");
+                    router.push("/account/view-tickets");
                 }
             })
 

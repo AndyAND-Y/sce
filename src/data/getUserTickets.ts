@@ -8,6 +8,9 @@ export default async function getUserTickets(userId: string) {
         },
         include: {
             user: true
+        },
+        orderBy: {
+            createDate: "desc"
         }
     })
 
