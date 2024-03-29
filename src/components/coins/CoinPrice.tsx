@@ -35,10 +35,6 @@ export default function CoinPrice({ symbol, initialPrice }: CoinPriceProps) {
                     return Number(newCandle.openPrice)
                 }
             );
-
-
-            console.log(Number(newCandle.openPrice));
-
         });
 
 
