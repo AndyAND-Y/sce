@@ -10,7 +10,6 @@ interface TicketProps {
 }
 
 export default async function Ticket({ params }: TicketProps) {
-
     const ticketId = params.ticketId;
 
     const ticket = await db.ticket.findUnique({
@@ -23,13 +22,17 @@ export default async function Ticket({ params }: TicketProps) {
     })
 
     if (!ticket) {
-        redirect('/');
+        redirect('/support/login');
     }
 
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        redirect('/');
+        redirect('/support/login')
+    }
+
+    if (currentUser.role !== "SUPPORT") {
+        redirect("/support/login")
     }
 
     return (
