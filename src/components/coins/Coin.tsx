@@ -14,7 +14,7 @@ export default function Coin({ coin, index }: CoinProps) {
 
     return (
         <Link
-            href={"/coins/" + coin.symbol}
+            href={"/coins/" + coin.symbol.toLowerCase()}
         >
             <div className="flex justify-between items-center p-4 rounded-lg shadow-sm hover:shadow bg-slate-200 dark:bg-slate-900 hover:bg-slate-300 hover:dark:bg-slate-700 transition-all duration-200">
                 <div className="flex gap-4 w-2/5 sm:w-2/3 items-center">
