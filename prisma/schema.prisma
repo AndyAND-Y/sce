@@ -50,6 +50,7 @@ model User {
     image                   String?
     accounts                Account[]
     twoFactorConfirmationId String?                @db.ObjectId
+    tickets                 Ticket[]
 }
 
 model TwoFactorToken {
@@ -67,4 +68,16 @@ model TwoFactorConfirmation {
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([userId])
+}
+
+model Ticket {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+
+    subject     String
+    description String
+    resolved    Boolean  @default(false)
+    createDate  DateTime
+
+    userId String @db.ObjectId
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

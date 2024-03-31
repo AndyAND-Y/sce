@@ -15,25 +15,23 @@ export default async function Navbar() {
                     >
                         <h1 className="text-2xl p-2 font-semibold">Secure Crypto Exchange</h1>
                     </Link>
-                    <div className="flex gap-2 ">
+                    <div className="flex gap-2 items-center ">
 
-                        <Button>
-                            <Link
-                                href={'/account'}
-                                className="flex items-center gap-1"
-                            >
-                                <div className="flex justify-center items-center">
-                                    <div className="size-8">
-                                        <MdAccountCircle className="size-full" />
+                        <Link
+                            href={'/account'}
+                        >
+                            <Button>
+                                <div className="flex items-center gap-1">
+                                    <div className="flex justify-center items-center">
+                                        <div className="size-8">
+                                            <MdAccountCircle className="size-full" />
+                                        </div>
                                     </div>
+                                    <div>Account</div>
                                 </div>
-                                <div>Account</div>
-
-                            </Link>
-                        </Button>
-                        <Button>
-                            <ThemeButton />
-                        </Button>
+                            </Button>
+                        </Link>
+                        <ThemeButton />
                     </div>
                 </div>
             </div>

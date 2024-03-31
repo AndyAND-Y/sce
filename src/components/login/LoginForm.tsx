@@ -1,5 +1,4 @@
 "use client";
-import RegisterSchema from "@/schemas/registerSchema";
 import { useState } from "react"
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -12,7 +11,13 @@ import LoginSchema from "@/schemas/loginSchema";
 import { signIn } from "next-auth/react";
 import Button from "../Button";
 
-export default function RegisterForm() {
+interface LoginFormProps {
+    title?: string
+    redirectLink?: string,
+    support?: boolean
+}
+
+export default function LoginForm({ title = "Login", redirectLink = '/', support = false }: LoginFormProps) {
 
     const [showTwoFactor, setShowTwoFactor] = useState(false);
     const [error, setError] = useState<string | undefined>("");
@@ -32,7 +37,7 @@ export default function RegisterForm() {
         setError("");
         setSuccess("");
 
-        login(values)
+        login(values, support)
             .then((data) => {
 
                 if (data?.error) {
@@ -46,8 +51,8 @@ export default function RegisterForm() {
                     signIn("credentials", {
                         ...values,
                         redirect: false
-                    }).then(() => {
-                        router.push('/')
+                    }).then(async () => {
+                        router.push(redirectLink)
                         router.refresh();
                     })
                 }
@@ -66,7 +71,7 @@ export default function RegisterForm() {
                         ...values,
                         redirect: false
                     }).then(() => {
-                        router.push('/')
+                        router.push(redirectLink)
                         router.refresh();
                     })
                 }
@@ -80,7 +85,7 @@ export default function RegisterForm() {
             <Container>
                 <div className="p-4 flex flex-col">
 
-                    <h1 className="text-xl font-medium mb-4 text-center">Login</h1>
+                    <h1 className="text-xl font-medium mb-4 text-center">{title}</h1>
 
                     <form className=" flex flex-col gap-2" onSubmit={form.handleSubmit(onSubmit)}>
 

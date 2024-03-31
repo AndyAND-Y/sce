@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const ThemeButton: React.FC = () => {
 
-    const [theme, setTheme] = useState<"dark" | "light">("light");
+    const [theme, setTheme] = useState<"dark" | "light">("dark");
 
     const handleThemeChange = () => {
 
         const hasDarkMode = document.documentElement.classList.contains("dark");
+
         if (hasDarkMode) {
             document.documentElement.classList.remove("dark");
             setTheme("light");
@@ -18,14 +19,15 @@ const ThemeButton: React.FC = () => {
 
         document.documentElement.classList.add("dark");
         setTheme("dark");
+
     }
 
-
     return (
-        <div className="p-1 flex justify-center items-center">
+        <div className="flex justify-center items-center p-2 text-lg bg-slate-300 dark:bg-slate-800 rounded-lg border dark:border-white border-black hover:shadow-inner hover:dark:bg-slate-900 hover:bg-slate-400 transition-all duration-200"
+            onClick={handleThemeChange}
+        >
             <div
                 className="size-8 text-black dark:text-white transition-all"
-                onClick={handleThemeChange}
             >
                 {
                     theme === "dark" ?

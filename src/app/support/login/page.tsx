@@ -1,13 +1,14 @@
-import RegisterPage from "@/components/register/RegisterPage";
+import LoginPage from "@/components/login/LoginPage";
 import getCurrentUser from "@/data/getCurrentUser";
 import { redirect } from "next/navigation";
 
-export default async function Register() {
+
+export default async function SupportLogin() {
 
     const currentUser = await getCurrentUser();
     if (currentUser) {
         redirect('/');
     }
 
-    return <RegisterPage />
+    return (<LoginPage title={"Support Login"} redirectLink={"/support/"} support />)
 }

@@ -8,8 +8,9 @@ import { sendTwoFactorTokenEmail } from "@/lib/mail";
 import { getTwoFactorTokenByEmail } from "@/data/getTwoFactorToken";
 import { getTwoFactorConfirmationByUserId } from "@/data/getTwoFactorConfirmation";
 import bcrypt from "bcrypt";
+import { error } from "console";
 
-const login = async (values: z.infer<typeof LoginSchema>) => {
+const login = async (values: z.infer<typeof LoginSchema>, support = false) => {
     const validatedFields = LoginSchema.safeParse(values);
 
     if (!validatedFields.success) {
@@ -26,6 +27,10 @@ const login = async (values: z.infer<typeof LoginSchema>) => {
 
     if (!existingUser || !existingUser.email || !existingUser.hashedPassword) {
         return { error: "Email does not exist!" }
+    }
+
+    if (!support && existingUser.role === "SUPPORT") {
+        return { error: "Support should login at /support/login" }
     }
 
     const isCorrectPassword = await bcrypt.compare(

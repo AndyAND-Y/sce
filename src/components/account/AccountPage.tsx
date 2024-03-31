@@ -46,7 +46,7 @@ const sections: Section[] = [
         title: "Log out",
         description: "Log out of your account.",
         actionLabel: "Log out",
-        link: "/account/log-out"
+        link: "/log-out"
     }
 
 ]
