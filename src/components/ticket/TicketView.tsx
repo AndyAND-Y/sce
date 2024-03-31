@@ -1,12 +1,8 @@
 import { Ticket, User } from "@prisma/client"
-
-import TimeAgo from 'javascript-time-ago'
-
-// English.
-import en from 'javascript-time-ago/locale/en'
 import { MdCheck, MdClose } from "react-icons/md"
-
-TimeAgo.addDefaultLocale(en)
+import ResolveButton from "./ResolveButton"
+import updateTicket from "@/actions/updateTicket"
+import timeAgo from "@/lib/timeAgo"
 
 interface TicketViewProps {
     supportView?: boolean
@@ -16,7 +12,10 @@ interface TicketViewProps {
 
 export default function TicketView({ supportView, ticket }: TicketViewProps) {
 
-    const timeAgo = new TimeAgo('en-US')
+    const action = async () => {
+        "use server";
+        return await updateTicket(ticket.id);
+    }
 
     const resolvedInfo = (
         <div className="p-2 bg-green-500/80 backdrop-blur rounded-lg shadow-sm shadow-green-300 dark:shadow-green-600  hover:bg-green-500 hover:backdrop-blur-0 duration-200">
@@ -34,7 +33,7 @@ export default function TicketView({ supportView, ticket }: TicketViewProps) {
             <div className="flex gap-2">
                 <div>Unresolved</div>
                 <div className="size-6">
-                    <MdCheck className="w-full h-full" />
+                    <MdClose className="w-full h-full" />
                 </div>
             </div>
         </div>
@@ -61,14 +60,7 @@ export default function TicketView({ supportView, ticket }: TicketViewProps) {
                 ticket.resolved === false && supportView &&
                 (
                     <div className="flex justify-center p-2 pt-8">
-                        <div className="p-2 bg-green-500/80 backdrop-blur rounded-lg shadow-sm shadow-green-300 dark:shadow-green-600  hover:bg-green-500 hover:backdrop-blur-0 duration-200">
-                            <div className="flex gap-2">
-                                <div>Resolve</div>
-                                <div className="size-6">
-                                    <MdCheck className="w-full h-full" />
-                                </div>
-                            </div>
-                        </div>
+                        <ResolveButton action={action} />
                     </div>
                 )
             }

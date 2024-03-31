@@ -1,7 +1,7 @@
 import getCurrentUser from "@/data/getCurrentUser";
 import { redirect } from "next/navigation";
 
-export default async function AccountLayout({
+export default async function SupportLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -9,14 +9,9 @@ export default async function AccountLayout({
 
     const currentUser = await getCurrentUser();
 
-    if (!currentUser) {
-        redirect("/login");
+    if (currentUser && currentUser.role !== "SUPPORT") {
+        redirect('/');
     }
 
-    if (currentUser.role === "SUPPORT") {
-        redirect("/support");
-    }
-
-    return (<>{children}</>)
-
+    return (<>{children}</>);
 }

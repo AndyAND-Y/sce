@@ -2,20 +2,19 @@ import { Ticket, User } from "@prisma/client"
 import Link from "next/link"
 import { MdClose } from "react-icons/md";
 import { MdCheck } from "react-icons/md";
-import TimeAgo from 'javascript-time-ago'
 
-// English.
-import en from 'javascript-time-ago/locale/en'
+import timeAgo from "@/lib/timeAgo";
 
-TimeAgo.addDefaultLocale(en)
 
 interface TicketCardProps {
     ticket: (Ticket & { user?: User })
+    supportView: boolean
 }
 
-export default async function TicketCard({ ticket }: TicketCardProps) {
+export default async function TicketCard({ ticket, supportView }: TicketCardProps) {
 
-    const timeAgo = new TimeAgo('en-US')
+    const supportLink = '/support/tickets/' + ticket.id;
+    const userLink = "/account/view-tickets/" + ticket.id;
 
     const resolvedInfo = (
         <div className="p-2 bg-green-500/80 backdrop-blur rounded-lg shadow-sm shadow-red-300 dark:shadow-green-600  hover:bg-green-500 hover:backdrop-blur-0 duration-200">
@@ -35,7 +34,7 @@ export default async function TicketCard({ ticket }: TicketCardProps) {
 
     return (
         <Link
-            href={"/account/view-tickets/" + ticket.id}
+            href={supportView ? supportLink : userLink}
         >
             <div className="flex justify-between items-center p-4 rounded-lg shadow-sm hover:shadow bg-slate-200 dark:bg-slate-900 hover:bg-slate-300 hover:dark:bg-slate-700 transition-all duration-200">
 

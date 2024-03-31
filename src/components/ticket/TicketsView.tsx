@@ -3,9 +3,10 @@ import TicketCard from "./TicketCard";
 
 interface TicketsViewProps {
     tickets: (Ticket & { user?: User })[]
+    supportView: boolean
 }
 
-export default function TicketsView({ tickets }: TicketsViewProps) {
+export default function TicketsView({ tickets, supportView }: TicketsViewProps) {
 
     return (
         <div className="flex flex-col gap-2">
@@ -33,7 +34,7 @@ export default function TicketsView({ tickets }: TicketsViewProps) {
 
             <div className="flex flex-col w-full gap-2">
                 {tickets.map((ticket) => {
-                    return <TicketCard key={ticket.id} ticket={ticket} />
+                    return <TicketCard key={ticket.id} ticket={ticket} supportView={supportView} />
                 })}
             </div>
         </div>
