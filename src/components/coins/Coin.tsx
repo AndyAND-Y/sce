@@ -41,6 +41,7 @@ export default function Coin({ coin, index }: CoinProps) {
                     <CoinPrice
                         symbol={coin.symbol}
                         initialPrice={coin.price}
+                        showProcent={false}
                     />
                 </div>
             </div>

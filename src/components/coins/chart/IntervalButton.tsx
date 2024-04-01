@@ -23,7 +23,7 @@ export default function IntervalButton({ value, selected }: { selected: boolean,
         if (selected) {
             return;
         }
-        router.replace(pathname + "?interval=" + value)
+        router.push(pathname + "?interval=" + value)
         router.refresh();
     }
 
@@ -31,7 +31,7 @@ export default function IntervalButton({ value, selected }: { selected: boolean,
         <div className="">
             <button
                 className={
-                    `p-2 dark:bg-slate-800 bg-slate-300 shadow-md shadow-slate-400 dark:shadow-slate-950 rounded-lg hover:scale-110 transition-all duration-200
+                    `p-2 dark:bg-slate-800 bg-slate-300 border-slate-900 dark:border-white shadow-md shadow-slate-400 dark:shadow-slate-950 rounded-lg hover:scale-110 transition-all duration-200
                     ${!selected ? "" : "border"}
                     `
                 }

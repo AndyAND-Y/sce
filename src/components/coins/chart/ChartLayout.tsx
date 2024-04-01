@@ -21,7 +21,7 @@ export default function ChartLayout({ data, symbol, interval }: ChartLayoutProps
                 <div className="flex justify-between">
                     <div className="flex items-center gap-2">
                         <p>Current Price: </p>
-                        <CoinPrice symbol={symbol} initialPrice={data[0].close} />
+                        <CoinPrice showProcent symbol={symbol} initialPrice={data[1].close} />
                     </div>
                     <div className="flex gap-4">
                         {["d", "w", "m"].map((value, index) => {
@@ -37,7 +37,7 @@ export default function ChartLayout({ data, symbol, interval }: ChartLayoutProps
                     <Chart data={data} />
                 </Suspense>
             </div>
-        </div>
+        </div >
     )
 
 }

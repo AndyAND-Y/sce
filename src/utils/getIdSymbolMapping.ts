@@ -1,4 +1,3 @@
-import { symbol } from "zod";
 
 const getMapping = async () => {
     const createMapping = async () => {
@@ -7,7 +6,9 @@ const getMapping = async () => {
             headers: {
                 'X-CMC_PRO_API_KEY': process.env.CMC_KEY!,
             },
-            cache: "force-cache"
+            next: {
+                revalidate: Infinity
+            }
         });
         const coins = await response.json();
         coins.data.forEach((coin: any) => {

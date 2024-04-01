@@ -66,6 +66,13 @@ export default function Chart({ data }: ChartProps) {
                 }]}
 
                 options={{
+                    plotOptions: {
+                        candlestick: {
+                            wick: {
+                                useFillColor: true
+                            }
+                        }
+                    },
                     chart: {
                         toolbar: {
                             show: false
@@ -78,6 +85,18 @@ export default function Chart({ data }: ChartProps) {
                     },
                     grid: {
                         show: false,
+                        strokeDashArray: 5,
+                        borderColor: isDarkMode ? "#e2e8f0" : "#1e293b",
+                        xaxis: {
+                            lines: {
+                                show: false,
+                            }
+                        },
+                        yaxis: {
+                            lines: {
+                                show: true,
+                            }
+                        }
                     },
                     xaxis: {
                         type: "category",
@@ -99,7 +118,6 @@ export default function Chart({ data }: ChartProps) {
                         },
                         categories: data.reverse().map(dataPoint => dataPoint.date),
                         tickAmount: seriesData.length < 100 ? Math.ceil(seriesData.length / 3) : Math.ceil(seriesData.length / 10),
-
                     },
                     yaxis: {
                         opposite: true,
@@ -109,7 +127,7 @@ export default function Chart({ data }: ChartProps) {
                                 fontSize: "14",
                                 fontWeight: "bold"
                             }
-                        }
+                        },
                     },
                     tooltip: {
                         enabled: true,

@@ -1,8 +1,6 @@
 import CandleType from "@/type/CandleType";
 
 export default async function getCandles(symbol: string, interval: "d" | "m" | "w"): Promise<CandleType[] | null> {
-
-
     const functions = {
         "d": "DIGITAL_CURRENCY_DAILY",
         "w": "DIGITAL_CURRENCY_WEEKLY",
@@ -20,36 +18,41 @@ export default async function getCandles(symbol: string, interval: "d" | "m" | "
         if (!link) {
             continue;
         }
+        let tries = 3;
+        while (tries) {
+            try {
+                tries--;
+                const candles = await fetch(link, { next: { revalidate: 3600 * 12 } })
+                    .then((res) => res.json())
+                    .then((data) => data[Object.keys(data)[1]])
+                    .then((data) => {
 
-        try {
-            const candles = await fetch(link, { next: { revalidate: 3600 * 12 } })
-                .then((res) => res.json())
-                .then((data) => data[Object.keys(data)[1]])
-                .then((data) => {
+                        const dates = Object.keys(data);
 
-                    const dates = Object.keys(data);
+                        return dates.map((date) => {
 
-                    return dates.map((date) => {
+                            const ohlc = data[date];
 
-                        const ohlc = data[date];
+                            const candle: CandleType = {
+                                type: interval,
+                                date: date,
+                                open: ohlc["1b. open (USD)"],
+                                high: ohlc["2b. high (USD)"],
+                                low: ohlc["3b. low (USD)"],
+                                close: ohlc["4b. close (USD)"],
+                            }
 
-                        const candle: CandleType = {
-                            type: interval,
-                            date: date,
-                            open: ohlc["1b. open (USD)"],
-                            high: ohlc["2b. high (USD)"],
-                            low: ohlc["3b. low (USD)"],
-                            close: ohlc["4b. close (USD)"],
-                        }
-
-                        return candle
+                            return candle
+                        })
                     })
-                })
 
-            return candles;
-        }
-        catch (error) {
-            console.log(error);
+                return candles;
+            }
+            catch (error) {
+                const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+                await sleep(2000);
+                console.log(error);
+            }
         }
     }
     return null;
