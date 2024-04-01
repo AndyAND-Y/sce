@@ -32,7 +32,7 @@ export default function CoinPrice({ symbol, initialPrice }: CoinPriceProps) {
             setPrice(
                 (lastPrice) => {
                     setLastPrice(lastPrice);
-                    return Number(newCandle.openPrice)
+                    return Number(newCandle.closePrice)
                 }
             );
         });
@@ -46,7 +46,7 @@ export default function CoinPrice({ symbol, initialPrice }: CoinPriceProps) {
 
     return (
         <div
-            className="flex flex-nowrap gap-[2px] text-lg"
+            className="flex flex-nowrap gap-[2px]"
         >
             <p>
                 $

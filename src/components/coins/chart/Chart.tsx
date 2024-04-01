@@ -3,6 +3,7 @@ import CandleType from "@/type/CandleType";
 import formatNumber from "@/utils/formatNumber";
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
+import { FaSpinner } from "react-icons/fa";
 
 
 const ReactApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false })
@@ -13,16 +14,18 @@ interface ChartProps {
 
 export default function Chart({ data }: ChartProps) {
 
-    const seriesData = useMemo(() => data.map((dataPoint) => {
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const seriesData = data.map((dataPoint) => {
         return {
             x: new Date(dataPoint.date),
             y: [dataPoint.open, dataPoint.high, dataPoint.low, dataPoint.close]
         }
-    }), [data])
-
-    const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+    });
 
     useEffect(() => {
+        setIsLoading(true);
         const observer = new MutationObserver(() => {
             const hasDarkMode = document.documentElement.classList.contains("dark");
             setIsDarkMode(hasDarkMode);
@@ -33,11 +36,23 @@ export default function Chart({ data }: ChartProps) {
             attributeFilter: ["class"],
         });
 
+        setIsLoading(false);
         return () => {
             observer.disconnect();
         };
     }, []);
 
+    if (isLoading) {
+        return <div className="w-full h-full">
+            <div className="flex justify-center items-center h-[500px]">
+                <div className="animate-spin">
+                    <div className="size-32">
+                        <FaSpinner className="size-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
     return (
         <div className="w-full h-full">
@@ -65,12 +80,26 @@ export default function Chart({ data }: ChartProps) {
                         show: false,
                     },
                     xaxis: {
-                        type: "datetime",
+                        type: "category",
                         labels: {
                             style: {
-                                colors: isDarkMode ? "white" : "black"
-                            }
-                        }
+                                colors: isDarkMode ? "white" : "black",
+                            },
+                            rotateAlways: true,
+                            rotate: 0,
+                            formatter: function (value) {
+
+                                function formatDate(value: string) {
+                                    const date = new Date(value);
+                                    return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: "2-digit" });
+                                }
+
+                                return formatDate(value);
+                            },
+                        },
+                        categories: data.reverse().map(dataPoint => dataPoint.date),
+                        tickAmount: seriesData.length < 100 ? Math.ceil(seriesData.length / 3) : Math.ceil(seriesData.length / 10),
+
                     },
                     yaxis: {
                         opposite: true,
