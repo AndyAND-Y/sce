@@ -6,9 +6,10 @@ interface CoinPriceProps {
     symbol: string
     initialPrice: number,
     showProcent?: boolean,
+    realtime?: boolean,
 }
 
-export default function CoinPrice({ symbol, initialPrice, showProcent = false }: CoinPriceProps) {
+export default function CoinPrice({ symbol, initialPrice, showProcent = false, realtime = true }: CoinPriceProps) {
 
     const [price, setPrice] = useState(initialPrice);
     const [isLoading, setIsLoading] = useState(showProcent);
@@ -39,6 +40,9 @@ export default function CoinPrice({ symbol, initialPrice, showProcent = false }:
 
 
     useEffect(() => {
+        if (!realtime) {
+            return;
+        }
         const socket = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}usdt@kline_1m`);
 
         // Event listener for incoming messages
@@ -64,7 +68,7 @@ export default function CoinPrice({ symbol, initialPrice, showProcent = false }:
             socket.close();
         }
 
-    }, [symbol])
+    }, [realtime, symbol])
 
     if (isLoading) {
         return <p className="animate-pulse">{formatNumber(initialPrice)}</p>

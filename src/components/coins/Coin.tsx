@@ -2,15 +2,19 @@ import CoinType from "@/type/CoinType";
 import CoinPrice from "./CoinPrice";
 import Link from "next/link";
 import Image from "next/image";
+import formatNumber from "@/utils/formatNumber";
 
 interface CoinProps {
     coin: CoinType
     index: number,
+    realtime?: boolean
+    amount?: number
 }
 
 
 
-export default function Coin({ coin, index }: CoinProps) {
+export default function Coin({ coin, index, realtime, amount }: CoinProps) {
+
 
     return (
         <Link
@@ -37,12 +41,19 @@ export default function Coin({ coin, index }: CoinProps) {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="flex gap-4">
+                    <div>
+                        {amount && formatNumber(amount)}
+                    </div>
+                    {amount && <div> X </div>}
                     <CoinPrice
                         symbol={coin.symbol}
                         initialPrice={coin.price}
                         showProcent={false}
+                        realtime={realtime}
                     />
+                    {amount && <div> = </div>}
+                    {amount && <div>${formatNumber(coin.price * amount)}</div>}
                 </div>
             </div>
         </Link>
