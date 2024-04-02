@@ -1,6 +1,6 @@
 import CoinView from "@/components/coins/CoinView";
 import getCandles from "@/data/getCandles";
-import CandleType from "@/type/CandleType";
+import { getMetadataBySymbol } from "@/utils/getIdSymbolMapping";
 
 interface MarketDataProps {
     params: {
@@ -35,7 +35,10 @@ export default async function MarketData({ params, searchParams }: MarketDataPro
 
     const sliceIndex = Math.min(intervalSliceIndicies[interval], candles.length);
 
+    const metadata = await getMetadataBySymbol(symbol);
 
-    return <CoinView candles={candles.slice(0, sliceIndex)} interval={interval} symbol={symbol} />
+    // return
+
+    return <CoinView candles={candles.slice(0, sliceIndex)} interval={interval} symbol={symbol} metadata={metadata} />
 
 }

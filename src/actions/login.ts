@@ -8,7 +8,6 @@ import { sendTwoFactorTokenEmail } from "@/lib/mail";
 import { getTwoFactorTokenByEmail } from "@/data/getTwoFactorToken";
 import { getTwoFactorConfirmationByUserId } from "@/data/getTwoFactorConfirmation";
 import bcrypt from "bcrypt";
-import { error } from "console";
 
 const login = async (values: z.infer<typeof LoginSchema>, support = false) => {
     const validatedFields = LoginSchema.safeParse(values);
