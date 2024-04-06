@@ -22,7 +22,7 @@ export default async function getCandles(symbol: string, interval: "d" | "m" | "
         while (tries) {
             try {
                 tries--;
-                const candles = await fetch(link, { next: { revalidate: 3600 * 12 } })
+                const candles = await fetch(link, { next: { revalidate: 3600 * 6 } })
                     .then((res) => res.json())
                     .then((data) => data[Object.keys(data)[1]])
                     .then((data) => {
