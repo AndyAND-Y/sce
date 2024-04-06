@@ -17,12 +17,12 @@ export default function Chart({ data }: ChartProps) {
     const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState(true);
 
-    const seriesData = data.map((dataPoint) => {
+    const seriesData = useMemo(() => data.reverse().map((dataPoint) => {
         return {
             x: new Date(dataPoint.date),
             y: [dataPoint.open, dataPoint.high, dataPoint.low, dataPoint.close]
         }
-    });
+    }), [data]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -116,7 +116,7 @@ export default function Chart({ data }: ChartProps) {
                                 return formatDate(value);
                             },
                         },
-                        categories: data.reverse().map(dataPoint => dataPoint.date),
+                        categories: data.map(dataPoint => dataPoint.date),
                         tickAmount: seriesData.length < 100 ? Math.ceil(seriesData.length / 3) : Math.ceil(seriesData.length / 10),
                     },
                     yaxis: {

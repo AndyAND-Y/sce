@@ -91,10 +91,8 @@ const order = async (values: z.infer<typeof OrderSchema>, symbol: string) => {
         }
 
         const index = currentUser.portfolio.coins.findIndex((coin) => coin.symbol === symbol);
-        console.log('index: ', index)
 
         const coin = currentUser.portfolio.coins[index];
-        console.log('coin: ', coin)
 
         if (coin.amount < quantity) {
             return {

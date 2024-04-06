@@ -26,9 +26,6 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
 
     const totalValue = portfolio.fiat + listWithPrices.reduce((acc, curr) => acc + curr.amount * curr.price, 0);
 
-    console.log(portfolio.fiat)
-    console.log(totalValue);
-
     return (
         <div className="flex justify-center w-full mt-8">
             <div className="w-2/3 flex flex-col gap-4">

@@ -2,9 +2,9 @@ let instance: any | null = null;
 
 const getMapping = async () => {
     if (!instance) {
+
         try {
             const ans = {};
-            console.log("map fetch call");
             const response = await fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?limit=100&sort=cmc_rank", {
                 headers: {
                     'X-CMC_PRO_API_KEY': process.env.CMC_KEY!,
@@ -23,12 +23,6 @@ const getMapping = async () => {
     }
 
     return instance;
-};
-
-export const getIdBySymbol = async (symbol: string) => {
-    return;
-    const mapping = await getMapping();
-    return mapping[symbol.toUpperCase()].id;
 };
 
 export const getMetadataBySymbol = async (symbol: string) => {
