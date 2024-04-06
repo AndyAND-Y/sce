@@ -17,12 +17,16 @@ export default function Chart({ data }: ChartProps) {
     const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState(true);
 
-    const seriesData = useMemo(() => data.reverse().map((dataPoint) => {
-        return {
-            x: new Date(dataPoint.date),
-            y: [dataPoint.open, dataPoint.high, dataPoint.low, dataPoint.close]
-        }
-    }), [data]);
+    const seriesData = useMemo(() => data
+        .sort((a, b) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime()
+        })
+        .map((dataPoint) => {
+            return {
+                x: new Date(dataPoint.date),
+                y: [dataPoint.open, dataPoint.high, dataPoint.low, dataPoint.close]
+            }
+        }), [data]);
 
     useEffect(() => {
         setIsLoading(true);

@@ -38,12 +38,13 @@ export default function CoinForm({ symbol }: CoinFormProps) {
 
         order(values, symbol)
             .then((data) => {
-                if (data.error) {
+                if (data?.error) {
                     setError(data.error)
                 }
 
                 if (data?.success) {
                     setSuccess(data.success)
+                    router.refresh();
                 }
             })
             .catch((error) => {

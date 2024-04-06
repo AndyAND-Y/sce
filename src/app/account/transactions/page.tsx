@@ -15,7 +15,9 @@ export default async function Portfolio() {
         redirect('/account/validate')
     }
 
-    const transactions = currentUser.transactions;
+    const transactions = currentUser.transactions.sort((a, b) => {
+        return b.createdAt.getTime() - a.createdAt.getTime()
+    });
 
     return (<TransactionsView transactions={transactions} />)
 

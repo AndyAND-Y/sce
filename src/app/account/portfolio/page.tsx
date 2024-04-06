@@ -1,11 +1,12 @@
 import PortfolioView from "@/components/portfolio/PortfolioView";
 import getCurrentUser from "@/data/getCurrentUser"
+import db from "@/lib/db";
 import { redirect } from "next/navigation";
 
 
 export default async function Portfolio() {
 
-    const currentUser = await getCurrentUser({ portfolio: true });
+    const currentUser = await getCurrentUser();
 
     if (!currentUser) {
         redirect('/')
@@ -15,11 +16,15 @@ export default async function Portfolio() {
         redirect('/account/validate')
     }
 
-    if (!currentUser.portfolio) {
+    const portfolio = await db.portfolio.findUnique({
+        where: {
+            userId: currentUser.id
+        }
+    })
+
+    if (!portfolio) {
         redirect('/account/validate')
     }
-
-    const portfolio = currentUser.portfolio;
 
     return (<PortfolioView portfolio={portfolio} />)
 

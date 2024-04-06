@@ -102,6 +102,8 @@ const order = async (values: z.infer<typeof OrderSchema>, symbol: string) => {
 
         coin.amount -= quantity;
 
+        currentUser.portfolio.coins = currentUser.portfolio.coins.filter((coin) => coin.amount > 0)
+
         await db.portfolio.update({
             where: {
                 userId: currentUser.id

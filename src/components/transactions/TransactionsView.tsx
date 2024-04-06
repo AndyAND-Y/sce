@@ -15,9 +15,9 @@ export default function TransactionsView({ transactions }: { transactions: Trans
                         <div className="grid grid-cols-5">
                             <div>T</div>
                             <div>Type</div>
-                            <div>Amount</div>
-                            <div>Symbol</div>
                             <div>Price</div>
+                            <div>Symbol</div>
+                            <div>Quantity</div>
                         </div>
                     </div>
                 </div>
