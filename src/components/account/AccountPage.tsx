@@ -29,10 +29,10 @@ const sections: Section[] = [
         link: "/account/validate"
     },
     {
-        title: "Change Password",
-        description: "Change your password for more security",
+        title: "Change Details",
+        description: "Change details of your account.",
         actionLabel: "Change",
-        link: "/account/change-password"
+        link: "/account/change-details"
     },
     {
         title: "Create Ticket",
