@@ -26,6 +26,6 @@ export default async function Portfolio() {
         redirect('/account/validate')
     }
 
-    return (<PortfolioView portfolio={portfolio} />)
+    return (<></>)
 
 }
