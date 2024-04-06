@@ -13,22 +13,24 @@ interface PortfolioViewProps {
 
 export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
 
-    // const listWithPrices = await Promise.all(portfolio.coins.map(async (coin) => {
+    const promises = portfolio.coins.map(async (coin) => {
 
-    //     //const price = await getPriceSymbol(coin.symbol);
-    //     const metadata = await getMetadataBySymbol(coin.symbol);
+        //const price = await getPriceSymbol(coin.symbol);
+        const metadata = await getMetadataBySymbol(coin.symbol);
 
-    //     return {
-    //         //price,
-    //         metadata,
-    //         ...coin
-    //     }
-    // }))
+        return {
+            //price,
+            metadata,
+            ...coin
+        }
+    })
+
+    const listWithPrices = await Promise.all(promises);
 
     //const totalValue = portfolio.fiat + listWithPrices.reduce((acc, curr) => acc + curr.amount * curr.price, 0);
 
     console.log("PORTFOLIO", portfolio);
-    // console.log("listWithPrices", listWithPrices);
+    console.log("listWithPrices", listWithPrices);
     //console.log("totalValue", totalValue);
 
     return (
@@ -71,12 +73,12 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
                     </div>
                 </div>
 
-                {/* <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                     {listWithPrices.map((coin, index) => {
                         //@ts-ignore
                         return (<Coin index={index + 1} coin={{ ...coin.metadata, price: coin.price }} key={index + "coin-portfolio"} realtime={false} amount={coin.amount} />)
                     })}
-                </div> */}
+                </div>
             </div>
         </div>
     )
