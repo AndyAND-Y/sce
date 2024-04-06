@@ -12,6 +12,7 @@ export default async function getPriceSymbol(symbol: string) {
         }
     })
         .then(res => res.json())
+        .then(res => { console.log(res); return res })
         .then(data => Number(data.price) as number)
 
 }
