@@ -27,7 +27,9 @@ export default async function MarketData({ params, searchParams }: MarketDataPro
         "m": 30,
     }
 
-    const candles = await getCandles(symbol, interval);
+    const candles = (await getCandles(symbol, interval))?.sort((a, b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime()
+    })
 
     if (!candles) {
         return;
