@@ -17,7 +17,7 @@ export default async function TicketCard({ ticket, supportView }: TicketCardProp
     const userLink = "/account/view-tickets/" + ticket.id;
 
     const resolvedInfo = (
-        <div className="p-2 bg-green-500/80 backdrop-blur rounded-lg shadow-sm shadow-red-300 dark:shadow-green-600  hover:bg-green-500 hover:backdrop-blur-0 duration-200">
+        <div className="p-2 bg-green-500/80 backdrop-blur rounded-lg shadow-sm shadow-green-300 dark:shadow-green-600  hover:bg-green-500 hover:backdrop-blur-0 duration-200">
             <div className="size-6">
                 <MdCheck className="w-full h-full" />
             </div>

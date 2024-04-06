@@ -1,6 +1,8 @@
 
 export default function formatNumber(x: number) {
 
+    x = Number(x);
+
     if (x >= 1) {
         return x.toFixed(2)
     }

@@ -15,7 +15,6 @@ const register = async (values: z.infer<typeof RegisterSchema>) => {
     const { email, password, name } = validatedFields.data;
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("Register: ", password, hashedPassword)
 
     const existingUser = await db.user.findUnique({
         where: {

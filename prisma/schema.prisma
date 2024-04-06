@@ -19,6 +19,46 @@ enum UserRole {
     SUPPORT
 }
 
+enum TransactionTypes {
+    ORDER
+    WITHDRAW
+    DEPOSIT
+}
+
+enum SideType {
+    BUY
+    SELL
+}
+
+model Transaction {
+    id        String           @id @default(auto()) @map("_id") @db.ObjectId
+    type      TransactionTypes
+    createdAt DateTime         @default(now())
+    amount    Float
+    user      User             @relation(fields: [userId], references: [id])
+    userId    String           @db.ObjectId
+
+    // for Orders
+    side   SideType?
+    symbol String?
+    price  Float?
+}
+
+type CoinHolding {
+    amount Float
+    symbol String
+}
+
+model Portfolio {
+    id     String        @id @default(auto()) @map("_id") @db.ObjectId
+    fiat   Float
+    userId String        @db.ObjectId
+    user   User          @relation(fields: [userId], references: [id])
+    coins  CoinHolding[]
+
+    @@unique([userId])
+}
+
 model Account {
     id                String  @id @default(auto()) @map("_id") @db.ObjectId
     userId            String  @db.ObjectId
@@ -45,12 +85,15 @@ model User {
     hashedPassword          String?
     role                    UserRole               @default(USER)
     isValidated             Boolean                @default(false)
+    expiryDate              DateTime?
     has2FA                  Boolean                @default(false)
     twoFactorConfimation    TwoFactorConfirmation?
     image                   String?
     accounts                Account[]
     twoFactorConfirmationId String?                @db.ObjectId
     tickets                 Ticket[]
+    transactions            Transaction[]
+    portfolio               Portfolio?
 }
 
 model TwoFactorToken {
