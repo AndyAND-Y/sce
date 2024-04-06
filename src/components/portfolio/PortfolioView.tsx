@@ -73,12 +73,12 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                {/* <div className="flex flex-col gap-4">
                     {listWithPrices.map((coin, index) => {
                         //@ts-ignore
                         return (<Coin index={index + 1} coin={{ ...coin.metadata, price: coin.price }} key={index + "coin-portfolio"} realtime={false} amount={coin.amount} />)
                     })}
-                </div>
+                </div> */}
             </div>
         </div>
     )
