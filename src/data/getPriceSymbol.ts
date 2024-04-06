@@ -1,18 +1,16 @@
 
 export default async function getPriceSymbol(symbol: string) {
 
-    const link =
-        "https://api.binance.com/api/v3/ticker/price?symbol=" +
-        symbol.toUpperCase() +
-        "USDT";
+    const link = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=" + symbol.toUpperCase();
 
     return await fetch(link, {
+        headers: {
+            'X-CMC_PRO_API_KEY': process.env.CMC_KEY!,
+        },
         next: {
-            revalidate: 10,
+            revalidate: 60,
         }
     })
         .then(res => res.json())
-        .then(res => { console.log(res); return res })
-        .then(data => Number(data.price) as number)
-
+        .then(res => Number(res.data[symbol.toUpperCase()][0].quote["USD"].price))
 }
