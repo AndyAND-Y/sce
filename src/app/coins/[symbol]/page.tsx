@@ -27,20 +27,24 @@ export default async function MarketData({ params, searchParams }: MarketDataPro
         "m": 30,
     }
 
-    const candles = (await getCandles(symbol, interval))?.sort((a, b) => {
-        return new Date(a.date).getTime() - new Date(b.date).getTime()
-    })
+    const candlesRaw = (await getCandles(symbol, interval))
 
-    if (!candles) {
+    if (!candlesRaw) {
         return;
     }
 
-    const sliceIndex = Math.min(intervalSliceIndicies[interval], candles.length);
+    const sliceIndex = Math.min(intervalSliceIndicies[interval], candlesRaw.length);
 
     const metadata = await getMetadataBySymbol(symbol);
 
+    const candles = candlesRaw
+        .slice(0, sliceIndex)
+        .sort((a, b) => {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+        })
+
     // return
 
-    return <CoinView candles={candles.slice(0, sliceIndex)} interval={interval} symbol={symbol} metadata={metadata} />
+    return <CoinView candles={candles} interval={interval} symbol={symbol} metadata={metadata} />
 
 }
