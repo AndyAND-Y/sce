@@ -15,21 +15,21 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
 
     const listWithPrices = await Promise.all(portfolio.coins.map(async (coin) => {
 
-        const price = await getPriceSymbol(coin.symbol);
+        //const price = await getPriceSymbol(coin.symbol);
         const metadata = await getMetadataBySymbol(coin.symbol);
 
         return {
-            price,
+            //price,
             metadata,
             ...coin
         }
     }))
 
-    const totalValue = portfolio.fiat + listWithPrices.reduce((acc, curr) => acc + curr.amount * curr.price, 0);
+    //const totalValue = portfolio.fiat + listWithPrices.reduce((acc, curr) => acc + curr.amount * curr.price, 0);
 
     console.log("PORTFOLIO", portfolio);
     console.log("listWithPrices", listWithPrices);
-    console.log("totalValue", totalValue);
+    //console.log("totalValue", totalValue);
 
     return (
         <div className="flex justify-center w-full mt-8">
@@ -64,7 +64,7 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
                     </div>
                     <div className="flex justify-between p-2">
                         <p className="text-2xl">Fiat stored: ${formatNumber(portfolio.fiat)}</p>
-                        <p className="text-2xl">Portfolio Value: ${formatNumber(totalValue)}</p>
+                        <p className="text-2xl">Portfolio Value: ${formatNumber(1)}</p>
                     </div>
                     <div className="">
 
