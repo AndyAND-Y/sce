@@ -28,7 +28,9 @@ export default async function getRecentCoins(limit: number = 30): Promise<CoinTy
                 return coin;
 
             }) as CoinType[];
-            return coins;
+            return coins.filter((coins) => {
+                return Math.round(coins.price) !== 1
+            });
         })
 
     coins.filter((coin) => {
