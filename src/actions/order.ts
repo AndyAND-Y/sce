@@ -70,7 +70,7 @@ const order = async (values: z.infer<typeof OrderSchema>, symbol: string) => {
         })
 
         return {
-            success: "Order got filled at " + currentPrice + "!"
+            success: "Order filled at " + currentPrice + "!"
         }
 
     }
@@ -126,8 +126,7 @@ const order = async (values: z.infer<typeof OrderSchema>, symbol: string) => {
         })
 
         return {
-            success: "Order got filled at " + currentPrice + "!\n" +
-                "Added " + amountToAdd + " to your account!"
+            success: "Order filled at " + currentPrice + "!"
         }
     }
 
