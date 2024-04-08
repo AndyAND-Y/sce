@@ -32,7 +32,7 @@ export default async function validate(values: z.infer<typeof ValidateSchema>) {
         return { error: "Not logged in!" }
     }
 
-    await db.user.update({
+    const user = await db.user.update({
         where: {
             id: currentUser?.id
         },
@@ -40,8 +40,22 @@ export default async function validate(values: z.infer<typeof ValidateSchema>) {
             name: legalName,
             isValidated: true,
             role: "TRADER"
+        },
+        include: {
+            portfolio: true,
         }
     })
+
+
+    if (!user.portfolio) {
+        await db.portfolio.create({
+            data: {
+                fiat: 0,
+                coins: [],
+                userId: user.id
+            }
+        })
+    }
 
     return { success: "You are now a trader!" }
 
