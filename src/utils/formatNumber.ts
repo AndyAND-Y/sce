@@ -2,6 +2,9 @@
 export default function formatNumber(x: number) {
 
     x = Number(x);
+    if (x == 0) {
+        return 0;
+    }
 
     if (x >= 1) {
         return x.toFixed(2)
