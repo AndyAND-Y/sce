@@ -36,11 +36,12 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
 
     const listWithPrices = await Promise.all(promises);
 
-    //const totalValue = portfolio.fiat + listWithPrices.reduce((acc, curr) => acc + curr.amount * curr.price, 0);
+    const totalValue = portfolio.fiat + listWithPrices.reduce((acc, curr) => acc + curr.amount * curr.price, 0);
 
-    console.log("PORTFOLIO", portfolio);
-    console.log("listWithPrices", listWithPrices);
-    //console.log("totalValue", totalValue);
+    // console.log("PORTFOLIO", portfolio);
+    // console.log("listWithPrices", listWithPrices);
+    // console.log(listWithPrices.length)
+    // console.log("totalValue", totalValue);
 
     return (
         <div className="flex justify-center w-full mt-8">
@@ -75,7 +76,7 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
                     </div>
                     <div className="flex justify-between p-2">
                         <p className="text-2xl">Fiat stored: ${formatNumber(portfolio.fiat)}</p>
-                        <p className="text-2xl">Portfolio Value: ${formatNumber(1)}</p>
+                        <p className="text-2xl">Portfolio Value: ${formatNumber(totalValue)}</p>
                     </div>
                     <div className="">
 
@@ -84,8 +85,13 @@ export default async function PortfolioView({ portfolio }: PortfolioViewProps) {
 
                 <div className="flex flex-col gap-4">
                     {
-                        listWithPrices.map(
-                            (coin, index) => (<Coin index={index + 1} coin={coin} key={index + "coin-portfolio"} realtime={false} amount={coin.amount} />))
+                        (listWithPrices.length !== 0)
+                        &&
+                        (listWithPrices.map(
+                            (coin, index) =>
+                                (<Coin index={index + 1} coin={coin} key={index + "coin-portfolio"} realtime={false} amount={coin.amount} />)
+                        )
+                        )
                     }
                 </div>
             </div>
