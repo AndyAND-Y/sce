@@ -8,12 +8,15 @@ export default async function Navbar() {
 
     return (
         <div className="w-full p-4 fixed top-0 h-28">
-            <div className="bg-slate-300/70 dark:bg-slate-900/70 backdrop-blur rounded-lg p-1 shadow-md shadow-slate-400 dark:shadow-slate-700 border-x-2 border-black dark:border-white">
+            <div className="bg-slate-300/70 dark:bg-slate-900/70 backdrop-blur rounded-lg p-1 shadow-md shadow-slate-400 dark:shadow-slate-700">
                 <div className="flex justify-between p-1 items-center">
                     <Link
                         href={'/'}
                     >
-                        <h1 className="text-2xl p-2 font-semibold">Secure Crypto Exchange</h1>
+                        <h1 className="text-2xl p-2 font-semibold">
+                            <span className="text-cyan-600 dark:text-cyan-300">s</span>ecure
+                            <span className="text-cyan-600 dark:text-cyan-300"> c</span>rypto
+                            <span className="text-cyan-600 dark:text-cyan-300"> e</span>xchange.</h1>
                     </Link>
                     <div className="flex gap-2 items-center ">
 
